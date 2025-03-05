@@ -94,9 +94,9 @@ bool createShaderProgram() {
     g_object.shaderProgram = 0;
 
     string vshCode = readFile("VertexShader.glsl");
-    string fshCode = readFile("FragmentShaderRings.glsl");
+    //string fshCode = readFile("FragmentShaderRings.glsl");
     //string fshCode = readFile("FragmentShaderWaves.glsl");
-
+    string fshCode = readFile("FragmentShaderMandelbrot.glsl");
 
     const GLchar* vsh = vshCode.c_str();
     const GLchar* fsh = fshCode.c_str();

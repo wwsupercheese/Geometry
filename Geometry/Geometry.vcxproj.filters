@@ -32,5 +32,11 @@
     <None Include="FragmentShaderWaves.glsl">
       <Filter>Исходные файлы</Filter>
     </None>
+    <None Include="FragmentShaderHeart.glsl">
+      <Filter>Исходные файлы</Filter>
+    </None>
+    <None Include="FragmentShaderMandelbrot.glsl">
+      <Filter>Исходные файлы</Filter>
+    </None>
   </ItemGroup>
 </Project>
