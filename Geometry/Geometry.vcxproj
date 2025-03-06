@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="Geometry.cpp" />
     <None Include="FragmentShaderHeart.glsl" />
+    <None Include="FragmentShaderJulia.glsl" />
     <None Include="FragmentShaderMandelbrot.glsl" />
     <None Include="FragmentShaderRings.glsl" />
     <None Include="FragmentShaderWaves.glsl" />
