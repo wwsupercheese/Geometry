@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Vital\\source\\repos\\Geometry\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderMandelbrot.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\FragmentShaderMandelbrot.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\VertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\VertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderJulia.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\FragmentShaderJulia.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\Geometry.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\Geometry.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderHeart.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\FragmentShaderHeart.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderWaves.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\FragmentShaderWaves.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderMandelbrot.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\FragmentShaderMandelbrot.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderRings.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\FragmentShaderRings.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\VertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\VertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderWaves.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4FC7BE82-C837-4235-A4A6-158008293533}|Geometry\\Geometry.vcxproj|solutionrelative:Geometry\\FragmentShaderWaves.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,77 +47,76 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FragmentShaderJulia.glsl",
+              "DocumentMoniker": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderJulia.glsl",
+              "RelativeDocumentMoniker": "Geometry\\FragmentShaderJulia.glsl",
+              "ToolTip": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderJulia.glsl*",
+              "RelativeToolTip": "Geometry\\FragmentShaderJulia.glsl*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-05T17:50:44.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "FragmentShaderMandelbrot.glsl",
               "DocumentMoniker": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderMandelbrot.glsl",
               "RelativeDocumentMoniker": "Geometry\\FragmentShaderMandelbrot.glsl",
               "ToolTip": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderMandelbrot.glsl",
               "RelativeToolTip": "Geometry\\FragmentShaderMandelbrot.glsl",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-03-04T18:45:38.27Z",
+              "WhenOpened": "2025-03-05T15:20:41.921Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "FragmentShaderHeart.glsl",
-              "DocumentMoniker": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderHeart.glsl",
-              "RelativeDocumentMoniker": "Geometry\\FragmentShaderHeart.glsl",
-              "ToolTip": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderHeart.glsl",
-              "RelativeToolTip": "Geometry\\FragmentShaderHeart.glsl",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Title": "FragmentShaderRings.glsl",
+              "DocumentMoniker": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderRings.glsl",
+              "RelativeDocumentMoniker": "Geometry\\FragmentShaderRings.glsl",
+              "ToolTip": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderRings.glsl",
+              "RelativeToolTip": "Geometry\\FragmentShaderRings.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-03-04T18:15:31.496Z",
+              "WhenOpened": "2025-03-05T14:46:43.884Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "VertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\VertexShader.glsl",
               "RelativeDocumentMoniker": "Geometry\\VertexShader.glsl",
               "ToolTip": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\VertexShader.glsl",
               "RelativeToolTip": "Geometry\\VertexShader.glsl",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-03-04T13:13:13.259Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "FragmentShaderWaves.glsl",
               "DocumentMoniker": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderWaves.glsl",
               "RelativeDocumentMoniker": "Geometry\\FragmentShaderWaves.glsl",
               "ToolTip": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderWaves.glsl",
               "RelativeToolTip": "Geometry\\FragmentShaderWaves.glsl",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-03-04T15:27:08.144Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-04T15:27:08.144Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FragmentShaderRings.glsl",
-              "DocumentMoniker": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderRings.glsl",
-              "RelativeDocumentMoniker": "Geometry\\FragmentShaderRings.glsl",
-              "ToolTip": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\FragmentShaderRings.glsl",
-              "RelativeToolTip": "Geometry\\FragmentShaderRings.glsl",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-03-04T14:52:54.186Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Geometry.cpp",
               "DocumentMoniker": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\Geometry.cpp",
               "RelativeDocumentMoniker": "Geometry\\Geometry.cpp",
               "ToolTip": "C:\\Users\\Vital\\source\\repos\\Geometry\\Geometry\\Geometry.cpp",
               "RelativeToolTip": "Geometry\\Geometry.cpp",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAmwGQAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAGgAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-02-13T07:26:16.893Z",
               "EditorCaption": ""
