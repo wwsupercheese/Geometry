@@ -2,8 +2,7 @@
 precision highp float;
 out vec4 o_color;
 in vec2 v_position;
-uniform float uScale; // Параметр масштаба
-
+uniform float uScale;
 void main() {
 
     vec2 c = vec2(-0.7, 0.27015);
@@ -13,8 +12,8 @@ void main() {
     int iterations;
     
     for (iterations = 0; iterations < max_iterations; iterations++) {
-        float x = z.x * z.x - z.y * z.y + c.x; // Реальная часть
-        float y = 2.0 * z.x * z.y + c.y; // Мнимая часть
+        float x = z.x * z.x - z.y * z.y + c.x; // real
+        float y = 2.0 * z.x * z.y + c.y; // image
         
         z = vec2(x, y);
         
@@ -23,12 +22,11 @@ void main() {
         }
     }
     
-    // Нормализация цвета на основе количества итераций
     float color = float(iterations) / float(max_iterations);
     vec3 col = vec3(
         0.5 + 0.5 * sin(color * 10.0),
         0.5 + 0.5 * sin(color * 15.0 + 1.0),
         0.5 + 0.5 * sin(color * 20.0 + 2.0)
     );
-    o_color = vec4(vec3(col), 1.0); // Цвет на основе количества итераций
+    o_color = vec4(vec3(col), 1.0);
 }

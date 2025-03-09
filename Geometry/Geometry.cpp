@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -23,12 +24,12 @@ struct Object {
 };
 
 Object g_object;
-
-string readFile(const string filePath) {
+static float clamp(float value, float _min, float _max) {
+    return fmax(_min, fmin(value, _max));
+}
+static string readFile(const string filePath) {
     ifstream file;
     stringstream buffer;
-
-    file.exceptions(ifstream::failbit | ifstream::badbit);
 
     try {
         file.open(filePath);
@@ -37,7 +38,7 @@ string readFile(const string filePath) {
         return buffer.str();
     }
     catch (const ifstream::failure& e) {
-        cerr << "Error: wasnt read"
+        cerr << "Error: wasnt read "
             << filePath << "': " << e.what() << endl;
         return "";
     }
@@ -102,8 +103,8 @@ bool createShaderProgram() {
     string vshCode = readFile("VertexShader.glsl");
 
     // Используем фрагментный шейдер
-    //string fshCode = readFile("FragmentShaderMandelbrot.glsl");
-    string fshCode = readFile("FragmentShaderJulia.glsl");
+    string fshCode = readFile("FragmentShaderMandelbrot.glsl");
+    //string fshCode = readFile("FragmentShaderJulia.glsl");
     //string fshCode = readFile("FragmentShaderHeart.glsl");
 
     const GLchar* vsh = vshCode.c_str();
@@ -123,10 +124,10 @@ bool createShaderProgram() {
 
 bool createModel() {
     const GLfloat vertices[] = {
-       -0.9f, -0.9f, 1.0f, 0.0f, 0.0f,
-        0.9f, -0.9f, 0.0f, 0.0f, 1.0f,
-        0.9f,  0.9f, 0.0f, 1.0f, 0.0f,
-       -0.9f,  0.9f, 1.0f, 1.0f, 1.0f
+       -1.0f, -1.0f, 1.0f, 0.0f, 0.0f,
+        1.0f, -1.0f, 0.0f, 0.0f, 1.0f,
+        1.0f,  1.0f, 0.0f, 1.0f, 0.0f,
+       -1.0f,  1.0f, 1.0f, 1.0f, 1.0f
     };
     g_object.verticCount = 4;
 
@@ -159,9 +160,6 @@ bool createModel() {
 
 // Функция обработки ввода
 void processInput(GLFWwindow* window) {
-    // Сохраняем предыдущий масштаб для коррекции смещения
-    float prevScale = scale;
-
     // Перемещение (скорость постоянная относительно экрана)
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
         offsetX -= moveSpeed;
@@ -175,14 +173,20 @@ void processInput(GLFWwindow* window) {
     // Масштабирование с коррекцией смещения для зума к центру
     if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS) {
         scale *= (1.0f + zoomSpeed);
-        offsetX *= (1.0f + zoomSpeed); // Корректируем смещение
+        offsetX *= (1.0f + zoomSpeed);
         offsetY *= (1.0f + zoomSpeed);
     }
     if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS) {
         scale *= (1.0f - zoomSpeed);
-        offsetX *= (1.0f - zoomSpeed); // Корректируем смещение
+        offsetX *= (1.0f - zoomSpeed);
         offsetY *= (1.0f - zoomSpeed);
     }
+
+    // Ограничиваем смещение и зум
+    scale = fmax(scale , 1);
+    offsetX = clamp(offsetX, -scale + 1, scale - 1);
+    offsetY = clamp(offsetY, -scale + 1, scale - 1);
+
 }
 
 bool init() {
