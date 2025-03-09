@@ -7,9 +7,10 @@ out vec3 v_color;
 out vec2 v_position;
 
 void main() {
-    vec2 scaledPos = a_position * uScale; // NEW
+    vec2 scaledPos = a_position * uScale;
 
-    gl_Position = vec4((a_position * uScale) + vec2(uOffset.x, uOffset.y), 0.0, 1.0);
+    gl_Position = vec4((scaledPos + uOffset), 0.0, 1.0);
+    
     v_color = a_color;
     v_position = a_position;
 }

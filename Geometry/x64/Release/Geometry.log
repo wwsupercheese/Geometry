@@ -1,6 +1,7 @@
 ﻿  Geometry.cpp
+C:\Users\Vital\source\repos\Geometry\Geometry\Geometry.cpp(189,17): warning C4244: =: преобразование "double" в "float", возможна потеря данных
   Создание кода
-  3 of 211 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
+  2 of 215 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
