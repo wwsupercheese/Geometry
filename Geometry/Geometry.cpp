@@ -1,27 +1,27 @@
 ﻿#include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-
 using namespace std;
 
 GLFWwindow* g_window;
 
-// Переменные для управления
-float offsetX = 0.0f;
-float offsetY = 0.0f;
-float scale = 1.0f;
-const float moveSpeed = 0.01f;
-const float zoomSpeed = 0.01f;
-
 struct Object {
     GLuint vbo, ibo, vao;
     GLsizei indexCount;
-    GLsizei verticCount;
     GLuint shaderProgram;
+    GLuint u_MVP;
 };
+
+glm::mat4 rotation, r2;
+glm::mat4 translation;
+glm::mat4 projection;
 
 Object g_object;
 static float clamp(float value, float _min, float _max) {
@@ -43,7 +43,6 @@ static string readFile(const string filePath) {
         return "";
     }
 }
-
 GLuint createShader(const GLchar* code, GLenum type) {
     GLuint id = glCreateShader(type);
 
@@ -86,7 +85,7 @@ GLuint createProgram(GLuint vS, GLuint fS) {
         if (len > 0) {
             char* log = (char*)alloca(len);
             glGetProgramInfoLog(id, len, NULL, log);
-            cout << "Program link error: " << endl << log << endl;
+            cout << "Shader program link error: " << endl << log << endl;
         }
         glDeleteProgram(id);
         return 0;
@@ -96,20 +95,15 @@ GLuint createProgram(GLuint vS, GLuint fS) {
     }
 }
 
-
 bool createShaderProgram() {
     g_object.shaderProgram = 0;
-
+    
     string vshCode = readFile("VertexShader.glsl");
-
-    // Используем фрагментный шейдер
-    string fshCode = readFile("FragmentShaderMandelbrot.glsl");
-    //string fshCode = readFile("FragmentShaderJulia.glsl");
-    //string fshCode = readFile("FragmentShaderHeart.glsl");
+    string fshCode = readFile("FragmentShaderHeart.glsl");
 
     const GLchar* vsh = vshCode.c_str();
     const GLchar* fsh = fshCode.c_str();
-
+   
     GLuint vS, fS;
     vS = createShader(vsh, GL_VERTEX_SHADER);
     fS = createShader(fsh, GL_FRAGMENT_SHADER);
@@ -119,23 +113,61 @@ bool createShaderProgram() {
     glDeleteShader(vS);
     glDeleteShader(fS);
 
+    g_object.u_MVP = glGetUniformLocation(g_object.shaderProgram, "u_mvp");
+
     return g_object.shaderProgram != 0;
 }
 
 bool createModel() {
     const GLfloat vertices[] = {
-       -1.0f, -1.0f, 1.0f, 0.0f, 0.0f,
-        1.0f, -1.0f, 0.0f, 0.0f, 1.0f,
-        1.0f,  1.0f, 0.0f, 1.0f, 0.0f,
-       -1.0f,  1.0f, 1.0f, 1.0f, 1.0f
-    };
-    g_object.verticCount = 4;
 
-    const GLuint indixes[] = {
-        0, 1, 2,
-        0, 2, 3
+        //Передняя грань
+        1.0f, 1.0f, 1.0f, 0.5f, 0.2f, 0.2f,
+        -1.0f, 1.0f, 1.0f, 0.5f, 0.2f, 0.2f,
+        -1.0f, -1.0f, 1.0f, 0.5f, 0.2f, 0.2f,
+        1.0f, -1.0f, 1.0f, 0.5f, 0.2f, 0.2f,
+
+        //Задняя грань
+        -1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+        1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+        1.0f, -1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+        -1.0f, -1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+
+        //Левая грань
+        -1.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f,
+        -1.0f, -1.0f, -1.0f, 1.0f, 0.0f, 1.0f,
+        -1.0f, -1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+        -1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+
+        //Правая грань
+        1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+        1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+        1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 1.0f,
+        1.0f, 1.0f, -1.0f, 0.0f, 0.0f, 1.0f,
+
+        //Верхняя грань
+        1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 0.0f,
+        -1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 0.0f,
+        -1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+        1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+
+        //Нижняя грань
+        1.0f, -1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+        -1.0f, -1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+        -1.0f, -1.0f, -1.0f, 0.0f, 1.0f, 1.0f,
+        1.0f, -1.0f, -1.0f, 0.0f, 1.0f, 1.0f,
+
     };
-    g_object.indexCount = 6;
+
+    const GLuint indices[] = {
+        0, 1, 2, 2, 3, 0,
+        4, 5, 6, 6, 7, 4,
+        8, 9, 10, 10, 11, 8,
+        12, 13, 14, 14, 15, 12,
+        16, 17, 18, 18, 19, 16,
+        20, 21, 22, 22, 23, 20,
+    };
+    g_object.indexCount = 36;
 
     glGenVertexArrays(1, &g_object.vao);
     glBindVertexArray(g_object.vao);
@@ -144,138 +176,152 @@ bool createModel() {
     glGenBuffers(1, &g_object.ibo);
 
     glBindBuffer(GL_ARRAY_BUFFER, g_object.vbo);
-    glBufferData(GL_ARRAY_BUFFER, 5 * g_object.verticCount * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 24 * 6 * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, g_object.ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, g_object.indexCount * sizeof(GLuint), indixes, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, g_object.indexCount * sizeof(GLuint), indices, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
 
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (const GLfloat*)0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (const GLfloat*)(2 * sizeof(GLfloat)));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), (const GLfloat*)0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), (const GLfloat*)(3 * sizeof(GLfloat)));
 
-    return g_object.vbo != 0 && g_object.ibo != 0 && g_object.vao != 0;
+    return ((g_object.vbo != 0) && (g_object.ibo != 0) && (g_object.vao != 0));
 }
 
-// Функция обработки ввода
-void processInput(GLFWwindow* window) {
-    // Перемещение (скорость постоянная относительно экрана)
-    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-        offsetX -= moveSpeed;
-    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-        offsetX += moveSpeed;
-    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-        offsetY -= moveSpeed;
-    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-        offsetY += moveSpeed;
 
-    // Масштабирование с коррекцией смещения для зума к центру
-    if (glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS) {
-        scale *= (1.0f + zoomSpeed);
-        offsetX *= (1.0f + zoomSpeed);
-        offsetY *= (1.0f + zoomSpeed);
-    }
-    if (glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS) {
-        scale *= (1.0f - zoomSpeed);
-        offsetX *= (1.0f - zoomSpeed);
-        offsetY *= (1.0f - zoomSpeed);
-    }
-
-    // Ограничиваем смещение и зум
-    scale = fmax(scale , 1);
-    offsetX = clamp(offsetX, -scale + 1, scale - 1);
-    offsetY = clamp(offsetY, -scale + 1, scale - 1);
-
+void initMatrices() {
+    projection = glm::perspective(3.1415f / 4.0f, 4.0f / 3.0f, 0.01f, 10.0f);
+    translation = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -6.0));
+    rotation = glm::rotate(glm::mat4(1.0f),3.1415f / 4.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    r2 = glm::rotate(glm::mat4(1.0f), 3.1415f /8.0f, glm::vec3(1.0f,0.0f,0.0f));
 }
 
-bool init() {
+
+bool init()
+{
+    // Set initial color of color buffer to white.
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+
+    initMatrices();
+
     return createShaderProgram() && createModel();
 }
 
-void reshape(GLFWwindow* window, int width, int height) {
-    glViewport(0, 0, width, height);
+void reshape(GLFWwindow* window, int width, int height)
+{
+
 }
 
-void draw() {
-    glClear(GL_COLOR_BUFFER_BIT);
+void draw()
+{
+    // Clear color buffer.
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glUseProgram(g_object.shaderProgram);
-
-    // Передаем параметры в шейдер
-
-    GLuint offsetLoc = glGetUniformLocation(g_object.shaderProgram, "uOffset");
-    GLuint scaleLoc = glGetUniformLocation(g_object.shaderProgram, "uScale");
-
-    glUniform2f(offsetLoc, offsetX, offsetY);
-    glUniform1f(scaleLoc, scale);
-
     glBindVertexArray(g_object.vao);
+    //glUniformMatrix4fv(g_object.u_MVP, 1, GL_FALSE, mvp);
+    glUniformMatrix4fv(g_object.u_MVP, 1, GL_FALSE, glm::value_ptr(projection * translation * rotation * r2));
+
     glDrawElements(GL_TRIANGLES, g_object.indexCount, GL_UNSIGNED_INT, NULL);
 }
 
-void cleanup() {
+void cleanup()
+{
     if (g_object.shaderProgram != 0) glDeleteProgram(g_object.shaderProgram);
     if (g_object.vbo != 0) glDeleteBuffers(1, &g_object.vbo);
     if (g_object.ibo != 0) glDeleteBuffers(1, &g_object.ibo);
     if (g_object.vao != 0) glDeleteVertexArrays(1, &g_object.vao);
 }
 
-bool initOpenGL() {
-    if (!glfwInit()) {
+bool initOpenGL()
+{
+    // Initialize GLFW functions.
+    if (!glfwInit())
+    {
         cout << "Failed to initialize GLFW" << endl;
         return false;
     }
 
+    // Request OpenGL 3.3 without obsoleted functions.
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    // Create window.
     g_window = glfwCreateWindow(800, 600, "OpenGL Test", NULL, NULL);
-    if (g_window == NULL) {
+    if (g_window == NULL)
+    {
         cout << "Failed to open GLFW window" << endl;
         glfwTerminate();
         return false;
     }
 
+    // Initialize OpenGL context with.
     glfwMakeContextCurrent(g_window);
+
+    // Set internal GLEW variable to activate OpenGL core profile.
     glewExperimental = true;
 
-    if (glewInit() != GLEW_OK) {
+    // Initialize GLEW functions.
+    if (glewInit() != GLEW_OK)
+    {
         cout << "Failed to initialize GLEW" << endl;
         return false;
     }
 
+    // Ensure we can capture the escape key being pressed.
     glfwSetInputMode(g_window, GLFW_STICKY_KEYS, GL_TRUE);
+
+    // Set callback for framebuffer resizing event.
     glfwSetFramebufferSizeCallback(g_window, reshape);
 
     return true;
 }
 
-void tearDownOpenGL() {
+void tearDownOpenGL()
+{
+    // Terminate GLFW.
     glfwTerminate();
 }
 
-int main() {
+int main()
+{
+    // Initialize OpenGL
     if (!initOpenGL())
         return -1;
 
+    // Initialize graphical resources.
     init();
 
-    while (glfwGetKey(g_window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-        glfwWindowShouldClose(g_window) == 0) {
+    float angle = 0.0f;
 
-        //Обработка ввода
-        processInput(g_window);
+    // Main loop until window closed or escape pressed.
+    while (glfwGetKey(g_window, GLFW_KEY_ESCAPE) != GLFW_PRESS && glfwWindowShouldClose(g_window) == 0)
+    {
+        // Draw scene.
         draw();
+
+        rotation = glm::rotate(glm::mat4(1.0f),angle, glm::vec3(0.0f, 1.0f, 0.0f));
+
+        float pi_2 = 4 * 3.1415f;
+        angle += 0.001f;
+        angle = fmod(angle, pi_2);
+        // Swap buffers.
         glfwSwapBuffers(g_window);
+        // Poll window events.
         glfwPollEvents();
-        //cout << scale << '\n';
     }
 
+    // Cleanup graphical resources.
     cleanup();
+
+    // Tear down OpenGL.
     tearDownOpenGL();
 
     return 0;

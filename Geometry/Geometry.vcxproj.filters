@@ -41,5 +41,8 @@
     <None Include="FragmentShaderJulia.glsl">
       <Filter>Исходные файлы</Filter>
     </None>
+    <None Include="FragmentShaderCube.glsl">
+      <Filter>Исходные файлы</Filter>
+    </None>
   </ItemGroup>
 </Project>

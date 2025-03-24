@@ -71,19 +71,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include;$(IncludePath);C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include</IncludePath>
+    <IncludePath>C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include;$(IncludePath);C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include;C:\OpenGL\glm</IncludePath>
     <LibraryPath>C:\OpenGL\glfw-3.4.bin.WIN64\lib-vc2022;C:\OpenGL\glew-2.2.0\lib\Release\x64;$(LibraryPath);C:\OpenGL\glfw-3.4.bin.WIN64\lib-vc2022;C:\OpenGL\glew-2.2.0\lib\Release\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include;$(IncludePath);C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include</IncludePath>
+    <IncludePath>C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include;$(IncludePath);C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include;C:\OpenGL\glm</IncludePath>
     <LibraryPath>C:\OpenGL\glfw-3.4.bin.WIN64\lib-vc2022;C:\OpenGL\glew-2.2.0\lib\Release\x64;$(LibraryPath);C:\OpenGL\glfw-3.4.bin.WIN64\lib-vc2022;C:\OpenGL\glew-2.2.0\lib\Release\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include;C:\OpenGL\glm</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\OpenGL\glfw-3.4.bin.WIN64\lib-vc2022;C:\OpenGL\glew-2.2.0\lib\Release\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;C:\OpenGL\glfw-3.4.bin.WIN64\include;C:\OpenGL\glew-2.2.0\include;C:\OpenGL\glm</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\OpenGL\glfw-3.4.bin.WIN64\lib-vc2022;C:\OpenGL\glew-2.2.0\lib\Release\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Geometry.cpp" />
+    <None Include="FragmentShaderCube.glsl" />
     <None Include="FragmentShaderHeart.glsl" />
     <None Include="FragmentShaderJulia.glsl" />
     <None Include="FragmentShaderMandelbrot.glsl" />
